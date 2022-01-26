@@ -1,4 +1,5 @@
 #streamlit
 .streamlit/secrets.toml
+notebooks/.streamlit/secrets.toml
 #datos
 data
