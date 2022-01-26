@@ -18,6 +18,19 @@ toolz = "*"
 dev = ["black", "docutils", "ipython", "flake8", "pytest", "sphinx", "mistune (<2.0.0)", "m2r", "vega-datasets", "recommonmark"]
 
 [[package]]
+name = "altair-catplot"
+version = "0.0.5"
+description = "Utility to generate plots with categorical variables using Altair."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+altair = "*"
+numpy = "*"
+pandas = "*"
+
+[[package]]
 name = "appnope"
 version = "0.1.2"
 description = "Disable App Nap on macOS >= 10.9"
@@ -1498,6 +1511,17 @@ six = ">=1.4.0"
 test = ["pytest (>=2.2.3)", "flake8 (>=2.4.0)", "isort (>=4.2.2)"]
 
 [[package]]
+name = "vega-datasets"
+version = "0.9.0"
+description = "A Python package for offline access to Vega datasets"
+category = "main"
+optional = false
+python-versions = ">=3.5"
+
+[package.dependencies]
+pandas = "*"
+
+[[package]]
 name = "watchdog"
 version = "2.1.6"
 description = "Filesystem events monitoring"
@@ -1538,12 +1562,16 @@ notebook = ">=4.4.1"
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.9,<3.11"
-content-hash = "eca1c4d00c4012cd9b9730dcd15bdd1698e59aca1d8f7a499536428c8fb99007"
+content-hash = "2f2576eea45bd3f68cb3e38938931d6df78566a265973eb5baf79d7b9e331010"
 
 [metadata.files]
 altair = [
     {file = "altair-4.2.0-py3-none-any.whl", hash = "sha256:0c724848ae53410c13fa28be2b3b9a9dcb7b5caa1a70f7f217bd663bb419935a"},
     {file = "altair-4.2.0.tar.gz", hash = "sha256:d87d9372e63b48cd96b2a6415f0cf9457f50162ab79dc7a31cd7e024dd840026"},
+]
+altair-catplot = [
+    {file = "altair_catplot-0.0.5-py3-none-any.whl", hash = "sha256:55d173896c1c6e4331ba18cdc9c9779ada1c11b4aebadffbbb69470f45d36edc"},
+    {file = "altair_catplot-0.0.5.tar.gz", hash = "sha256:bb865c75136ce0e65ae890acbafcd43a6b85a79271a9f0423b66efe896f00392"},
 ]
 appnope = [
     {file = "appnope-0.1.2-py2.py3-none-any.whl", hash = "sha256:93aa393e9d6c54c5cd570ccadd8edad61ea0c4b9ea7a01409020c9aa019eb442"},
@@ -2575,6 +2603,10 @@ urllib3 = [
 validators = [
     {file = "validators-0.18.2-py3-none-any.whl", hash = "sha256:0143dcca8a386498edaf5780cbd5960da1a4c85e0719f3ee5c9b41249c4fefbd"},
     {file = "validators-0.18.2.tar.gz", hash = "sha256:37cd9a9213278538ad09b5b9f9134266e7c226ab1fede1d500e29e0a8fbb9ea6"},
+]
+vega-datasets = [
+    {file = "vega_datasets-0.9.0-py3-none-any.whl", hash = "sha256:3d7c63917be6ca9b154b565f4779a31fedce57b01b5b9d99d8a34a7608062a1d"},
+    {file = "vega_datasets-0.9.0.tar.gz", hash = "sha256:9dbe9834208e8ec32ab44970df315de9102861e4cda13d8e143aab7a80d93fc0"},
 ]
 watchdog = [
     {file = "watchdog-2.1.6-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:9693f35162dc6208d10b10ddf0458cc09ad70c30ba689d9206e02cd836ce28a3"},
