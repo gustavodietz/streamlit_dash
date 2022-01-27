@@ -11,3 +11,4 @@ watchdog
 plotly
 google-auth
 google-auth-httplib2
+pingouin

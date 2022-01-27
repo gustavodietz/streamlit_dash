@@ -16,6 +16,8 @@ from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 
 from urllib.error import URLError
+from pingouin import mixed_anova, read_dataset, pairwise_ttests
+import pingouin as pg
 #Oculatamiento de las mierdas de streamlit
 st.markdown(""" <style>
 #MainMenu {visibility: hidden;}
@@ -54,6 +56,9 @@ def run_query():
     df = pd.merge(df_1, df_2, how = 'left', left_on = ['email', 'Generation_key'], right_on = ['email', 'Generation_key'])
     #me quedo sólo con los completos:
     df = df.loc[df.Completion_prepost == 'Completed']
+    ## quito a Carola y beatriz
+    df = df.loc[~df.Teacher.isin(["Carola", "Beatriz"])]
+    df['id_subject'] = df.email + df.Generation_key
     return df
 
 
@@ -72,14 +77,49 @@ try:
         st.error("Please select at least one scale.")
     else:
         for escala in scales:
-            height = len(df[option].unique()) * 400
+            height = len(df[option].unique().tolist()) * 400
             fig = px.box(df, x="Program", y=escala, points='all',
                          color="Form", title=escala + ' by ' + option, notched=True,
                          facet_row=option,
                          color_discrete_sequence=px.colors.qualitative.Pastel, template="plotly_dark",
                          height=height,facet_row_spacing = 0.01
                          )
+            anova = df.mixed_anova(dv=escala, between="Program", within='Form', subject='id_subject', effsize="ng2",
+                                   correction=True)
+            posthocs_anova = pg.pairwise_ttests(dv=escala, within='Form', subject='id_subject', between="Program",
+                                          parametric=False, effsize='cohen', interaction=True, correction=True,
+                                          data=df).round(3)
+            anova_mixed = df.mixed_anova(dv=escala, between=option, within='Form', subject='id_subject', effsize="ng2",
+                                   correction=True).round(3)
+            posthocs_anova_mixed = pg.pairwise_ttests(dv=escala, within='Form', subject='id_subject', between=option,
+                                          parametric=False, effsize='cohen', interaction=True, correction=True,
+                                          data=df).round(3)
+
             st.plotly_chart(fig, use_container_width=True)
+            with st.expander("See " + escala + " ANOVA mixed  and Posthoc analysis (Time * " + option + ")"):
+                st.markdown("""
+                ### Two ways ANOVA (Between Program and Time)
+
+                """)
+                st.dataframe(anova)
+
+                st.markdown("""
+                ### Posthoc analysis (Between Program and Time)
+
+                """)
+                st.dataframe(posthocs_anova)
+
+
+                st.markdown("""
+                ### Anova Mixed
+                
+                """)
+                st.dataframe(anova_mixed)
+                st.markdown("""
+                ### Post hoc
+
+                """)
+                st.dataframe(posthocs_anova_mixed)
 
 except URLError as e:
     st.error(
