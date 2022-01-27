@@ -1,0 +1,13 @@
+numpy
+streamlit
+google-cloud-bigquery
+google-cloud
+plotly-express
+google-cloud-storage
+altair
+vega-datasets
+altair-catplot
+watchdog
+plotly
+google-auth
+google-auth-httplib2
