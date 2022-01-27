@@ -98,7 +98,7 @@ try:
             st.plotly_chart(fig, use_container_width=True)
             with st.expander("See " + escala + " ANOVA mixed  and Posthoc analysis (Time * " + option + ")"):
                 st.markdown("""
-                ### Two ways ANOVA (Between Program and Time)
+                ### Mixed ANOVA (Between Program and Time)
 
                 """)
                 st.dataframe(anova)
@@ -111,7 +111,7 @@ try:
 
 
                 st.markdown("""
-                ### Anova Mixed
+                ### Mixed ANOVA
                 
                 """)
                 st.dataframe(anova_mixed)
