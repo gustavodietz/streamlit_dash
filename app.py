@@ -61,6 +61,19 @@ def run_query():
     df['id_subject'] = df.email + df.Generation_key
     return df
 
+#Función para subrayar los valores significativos
+def hightlight_p_value(row):
+
+    highlight = 'background-color: lightcoral;'
+    default = ''
+
+    if type(row) in [float, int]:
+        if row < 0.05:
+            return highlight
+    return default
+
+
+
 
 
 try:
@@ -86,14 +99,15 @@ try:
                          )
             anova = df.mixed_anova(dv=escala, between="Program", within='Form', subject='id_subject', effsize="ng2",
                                    correction=True)
+            anova = anova.style.applymap(hightlight_p_value, subset = ['p-unc'])
             posthocs_anova = pg.pairwise_ttests(dv=escala, within='Form', subject='id_subject', between="Program",
                                           parametric=False, effsize='cohen', interaction=True, correction=True,
-                                          data=df).round(3)
+                                          data=df).round(3).style.applymap(hightlight_p_value, subset = ['p-unc'])
             anova_mixed = df.mixed_anova(dv=escala, between=option, within='Form', subject='id_subject', effsize="ng2",
-                                   correction=True).round(3)
+                                   correction=True).round(3).style.applymap(hightlight_p_value, subset = ['p-unc'])
             posthocs_anova_mixed = pg.pairwise_ttests(dv=escala, within='Form', subject='id_subject', between=option,
                                           parametric=False, effsize='cohen', interaction=True, correction=True,
-                                          data=df).round(3)
+                                          data=df).round(3).style.applymap(hightlight_p_value, subset = ['p-unc'])
 
             st.plotly_chart(fig, use_container_width=True)
             with st.expander("See " + escala + " ANOVA mixed  and Posthoc analysis (Time * " + option + ")"):
