@@ -1,7 +1,7 @@
 #streamlit
 .streamlit/secrets.toml
 notebooks/.streamlit/secrets.toml
-notebooks/
+notebooks
 #datos
 data
 #quito este fichero de dependencias.
