@@ -4,5 +4,3 @@ notebooks/.streamlit/secrets.toml
 notebooks
 #datos
 data
-#quito este fichero de dependencias.
-requirements.txt
