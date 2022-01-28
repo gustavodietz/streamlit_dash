@@ -21,8 +21,12 @@ plotly = "^5.5.0"
 google-auth = "^2.5.0"
 google-auth-httplib2 = "^0.1.0"
 pingouin = "^0.5.0"
+notebook = "^6.4.8"
+panel-highcharts = "^20211210.1"
 
 [tool.poetry.dev-dependencies]
+notebook = "^6.4.8"
+ipywidgets = "^7.6.5"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
