@@ -140,7 +140,7 @@ try:
                 ### Post hoc
 
                 """)
-                st.table(posthocs_anova_mixed)
+                st.dataframe(posthocs_anova_mixed)
 
 except URLError as e:
     st.error(
