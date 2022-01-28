@@ -1,7 +1,7 @@
 #streamlit
 .streamlit/secrets.toml
 notebooks/.streamlit/secrets.toml
-notebooks/
+notebooks/Prueba notebook.ipynb
 #datos
 data
 .idea/

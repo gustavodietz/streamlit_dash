@@ -82,7 +82,7 @@ try:
     df = run_query()
     option = st.sidebar.selectbox(
         'Which variable would you like to choose',
-        ('Format', 'Teacher', 'Gender', 'Completion_prepost'))
+        ('Format', 'Teacher', 'Gender'))
     scales = st.sidebar.multiselect(
         "Choose scales", df.loc[:, 'DASS_depression':'RRS_brooding'].columns.tolist(),
         ['DASS_depression', "DASS_anxiety"]
