@@ -1,6 +1,6 @@
 #streamlit
 .streamlit/secrets.toml
 notebooks/.streamlit/secrets.toml
-notebooks
+notebooks/
 #datos
 data
