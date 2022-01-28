@@ -4,3 +4,4 @@ notebooks/.streamlit/secrets.toml
 notebooks/
 #datos
 data
+.idea/
