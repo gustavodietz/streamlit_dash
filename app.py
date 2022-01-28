@@ -103,14 +103,19 @@ try:
                                    correction=True)
             anova = anova.style.applymap(hightlight_p_value, subset = ['p-unc'])
             posthocs_anova = pg.pairwise_ttests(dv=escala, within='Form', subject='id_subject', between="Program",
-                                          parametric=False, effsize='cohen', interaction=True, correction=True,
+                                          parametric=False, interaction=True, correction=True,
                                           data=df).round(3).style.applymap(hightlight_p_value, subset = ['p-unc'])
             anova_mixed = df.mixed_anova(dv=escala, between=option, within='Form', subject='id_subject', effsize="ng2",
                                    correction=True).round(3).style.applymap(hightlight_p_value, subset = ['p-unc'])
             posthocs_anova_mixed = pg.pairwise_ttests(dv=escala, within='Form', subject='id_subject', between=option,
-                                          parametric=False, effsize='cohen', interaction=True, correction=True,
-                                          data=df).round(3).style.applymap(hightlight_p_value, subset = ['p-unc'])
-
+                                          parametric=False, interaction=True, correction=True,
+                                          data=df).round(3).drop(columns = ['alternative', 'U-val', 'W-val'])#
+            for i in posthocs_anova_mixed.loc[:, 'hedges'].index:
+                try:
+                    posthocs_anova_mixed.loc[i, 'hedges'] = posthocs_anova_mixed.loc[i, 'hedges'][0]
+                except:
+                    posthocs_anova_mixed.loc[i, 'hedges'] = posthocs_anova_mixed.loc[i, 'hedges']
+            posthocs_anova_mixed = posthocs_anova_mixed.style.applymap(hightlight_p_value, subset = ['p-unc'])
             st.plotly_chart(fig, use_container_width=True)
             with st.expander("See " + escala + " ANOVA mixed  and Posthoc analysis (Time * " + option + ")"):
                 st.markdown("""
@@ -135,7 +140,7 @@ try:
                 ### Post hoc
 
                 """)
-                st.dataframe(posthocs_anova_mixed)
+                st.table(posthocs_anova_mixed)
 
 except URLError as e:
     st.error(
